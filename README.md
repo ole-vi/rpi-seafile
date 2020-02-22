@@ -67,7 +67,9 @@ They are used to enter the seafile from Tor browser, so need to note them somewh
 ## Problem of entrypoint.sh
 
 ```
-[02/21/20 05:16:55] ../common/ccnet-db.c(142): Error exec query CREATE UNIQUE INDEX IF NOT EXISTS reference_id_index on EmailUser (reference_id): sqlite3_exec failed: table EmailUser has no column named reference_id.
+[02/21/20 05:16:55] ../common/ccnet-db.c(142): 
+Error exec query CREATE UNIQUE INDEX IF NOT EXISTS reference_id_index on EmailUser (reference_id): 
+sqlite3_exec failed: table EmailUser has no column named reference_id.
 [02/21/20 05:16:55] user-mgr.c(769): Failed to create user db tables.
 failed to run "ccnet-server -t"
 ```
