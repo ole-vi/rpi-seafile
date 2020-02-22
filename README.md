@@ -42,13 +42,17 @@ After spawning the seafile container, go to `/opt/haiwen/seafile-server-6.3.4`
 Then, execute `setup-seafile.sh`
 
 You are asked the following
-1. server name 
+1. Q. server name 
+
 A. anything
-1. ip address or domain name
+1. Q. ip address or domain name
+
 A. your onion address
-1. volume path
+1. Q. volume path
+
 A. just push Enter
-1. TCP port for seafile server
+1. Q. TCP port for seafile server
+
 A. Just push Enter
 
 After that, you are asked to several questions, but all of them are confirmation.
