@@ -1,8 +1,12 @@
-# rpi-seafile
+# Seafile-rpi
 
 ## Basic information
 
 I refer a Dockerimage: https://github.com/yuriteixeira/rpi-seafile
+Fortunately, this Docker image can be used without any modification.
+However, the very base image of this seafile image is Rasbian wheezy, so we cannot change the Dockerfile of the image at all.
+Therefore. I built the base emage: pytyon-rpi from resin/rasbian:stretch
+Then, I built the Seafile-rpi image from the python-rpi.
 
 There are two major versions in Seafile.
 Old version: version 6.*.*
@@ -10,10 +14,11 @@ New version: version 7.*.*
 
 Old version works as just one Docker image.
 New version is designed as Docker services; Seafile service works with three Docker images. 
+Please look at [https://download.seafile.com/published/seafile-manual/deploy/deploy_with_docker.md#user-content-Download] to get more detail information.
 
 The Dockerfile which to I refer uses old version. 
 
-## How to make iamge
+## How to make image
 
 1 Build base image
 The base image of Dockerfile is in python directory
@@ -59,10 +64,14 @@ Then you are asked two questions
 
 They are used to enter the seafile from Tor browser, so need to note them somewhere or memorize them.
 
+## Problem of entrypoint.sh
 
+```
+[02/21/20 05:16:55] ../common/ccnet-db.c(142): Error exec query CREATE UNIQUE INDEX IF NOT EXISTS reference_id_index on EmailUser (reference_id): sqlite3_exec failed: table EmailUser has no column named reference_id.
+[02/21/20 05:16:55] user-mgr.c(769): Failed to create user db tables.
+failed to run "ccnet-server -t"
+```
 
-
-
-
-
+In my case, sqllite does not start correctly.
+I think that we need to analyze what `setup-seafile.sh` is doing in the configuration process to make the proper entrypoint.sh
 
