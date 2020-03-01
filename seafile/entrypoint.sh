@@ -61,6 +61,7 @@ update_sqlite3() {
   alter table EmailUser add column reference_id VARCHAR${lp}255${rp};
   CREATE UNIQUE INDEX IF NOT EXISTS reference_id_index on EmailUser ${lp}reference_id${rp};
   CREATE UNIQUE INDEX IF NOT EXISTS ldapusers_reference_id_index on LDAPUsers${lp}reference_id${rp};
+}
 
 setup_sqlite() {
   echo "setup_sqlite"
