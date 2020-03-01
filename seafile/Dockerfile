@@ -1,5 +1,5 @@
-FROM rpi-python:stretch
-MAINTAINER Yuri Teixeira <oyuriteixeira at gmail dot com>
+FROM hirotochigi/rpi-python
+MAINTAINER hiroTochigi
 
 ENV DATADIR /seafile
 ENV BASEPATH /opt/haiwen
@@ -26,9 +26,7 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
-#RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 RUN localedef -i en_US -c -f UTF-8 -A /etc/locale.alias en_US.UTF-8
-EXPOSE 8000 8082
 
-#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"] 
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"] 
