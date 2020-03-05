@@ -3,8 +3,6 @@ set -e
 set -u
 set -o pipefail
 
-lp="("
-rp=")"
 
 DATADIR=${DATADIR:-"/seafile"}
 BASEPATH=${BASEPATH:-"/opt/haiwen"}
@@ -55,13 +53,6 @@ choose_setup() {
   setup_sqlite
 }
 
-update_sqlite3() {
-  sqlite3 DATADIR/ccnet/PeerMgr/usermgr.db
-  alter table LDAPUsers add column reference_id VARCHAR${lp}255${rp};
-  alter table EmailUser add column reference_id VARCHAR${lp}255${rp};
-  CREATE UNIQUE INDEX IF NOT EXISTS reference_id_index on EmailUser ${lp}reference_id${rp};
-  CREATE UNIQUE INDEX IF NOT EXISTS ldapusers_reference_id_index on LDAPUsers${lp}reference_id${rp};
-}
 
 setup_sqlite() {
   echo "setup_sqlite"
