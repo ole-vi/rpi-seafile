@@ -18,6 +18,7 @@ autorun() {
   
   # Needed to check the return code
   set +e
+  choose_setup
   control_seafile "start"
   local RET=$?
   set -e
