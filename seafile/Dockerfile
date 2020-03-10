@@ -14,10 +14,12 @@ RUN useradd -d ${DATADIR} -M -s /bin/bash -c "Seafile User" seafile \
     && mkdir -p ${DATADIR} ${BASEPATH} 
 
 RUN curl -skL https://github.com/$(curl -skL https://github.com/haiwen/seafile-rpi/releases \
-    | grep -oE 'haiwen/seafile-rpi/releases/download/v6.3.4/seafile-server_6.3.4_stable_pi.tar.gz'|sort -r|head -1) \
+    | grep -oE 'haiwen/seafile-rpi/releases/download/v.*/seafile-server_.*_stable_pi.tar.gz'|sort -r|head -1) \
     | tar -C ${BASEPATH} -xz 
 
 RUN chown -R seafile:seafile ${DATADIR} ${BASEPATH}
+
+RUN pip install certifi idna 
 
 COPY ["entrypoint.sh", "/usr/local/bin/"]
 RUN chmod +x /usr/local/bin/entrypoint.sh
