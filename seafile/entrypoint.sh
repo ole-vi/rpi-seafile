@@ -22,6 +22,7 @@ autorun() {
   local RET=$?
   set -e
 
+  # Needed to change ip address from localhost to 0.0.0.0 in seafile/conf/gunicorn.conf.
   sed -i s/127.0.0.1/0.0.0.0/ ${BASEPATH}/conf/gunicorn.conf
 
   # Try an initial setup on error
