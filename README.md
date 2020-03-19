@@ -9,21 +9,7 @@ Fortunately, this Docker image can be used without any modification.
 However, the very base image of this seafile image is Rasbian wheezy, so we cannot change the Dockerfile of the image at all.
 Therefore. I built the base emage: pythyon-rpi from resin/rasbian:stretch
 
-Then, I built the Seafile-rpi image from the python-rpi.
-
-
-There are two major versions in Seafile.
-
-Old version: version 6.*.*
-
-New version: version 7.*.*
-
-
-Old version works as just one Docker image.
-
-New version is designed as Docker services; Seafile service works with three Docker images.
-
-Please look at [https://download.seafile.com/published/seafile-manual/deploy/deploy_with_docker.md#user-content-Download] to get more detail information.
+This Dockerfile can download the latest seafile server images for Raspberry Pi.
 
 ## Deploy Service
 
@@ -35,8 +21,6 @@ docker run -e SEAFILE_NAME=Seaflail
 -v /home/data/seafile:/seafile 
 -p 8000:8000 -p 8082:8082 hirotochigi/seafile-rpi
 ```
-
-The Dockerfile which to I refer uses old version. 
 
 ## How to make image
 
