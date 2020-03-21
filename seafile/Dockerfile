@@ -32,4 +32,3 @@ ENV LC_ALL en_US.UTF-8
 RUN localedef -i en_US -c -f UTF-8 -A /etc/locale.alias en_US.UTF-8
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"] 
-#ENTRYPOINT ["python"]
