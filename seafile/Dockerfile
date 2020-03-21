@@ -5,7 +5,7 @@ ENV DATADIR /seafile
 ENV BASEPATH /opt/haiwen
 
 RUN sudo apt-get update && apt-get install -y \
-    python-ldap python-urllib3 python-imaging sqlite3 curl locales \
+    python-ldap python-urllib3 python-imaging sqlite3 curl locales nginx\
     --no-install-recommends \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/*
@@ -32,3 +32,4 @@ ENV LC_ALL en_US.UTF-8
 RUN localedef -i en_US -c -f UTF-8 -A /etc/locale.alias en_US.UTF-8
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"] 
+#ENTRYPOINT ["python"]
