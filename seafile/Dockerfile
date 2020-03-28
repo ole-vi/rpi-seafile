@@ -5,7 +5,7 @@ ENV DATADIR /seafile
 ENV BASEPATH /opt/haiwen
 
 RUN sudo apt-get update && apt-get install -y \
-    python-ldap python-urllib3 python-imaging sqlite3 curl locales \
+    python-ldap python-urllib3 python-imaging sqlite3 curl locales nginx\
     --no-install-recommends \
     && apt-get autoclean \
     && rm -rf /var/lib/apt/lists/*

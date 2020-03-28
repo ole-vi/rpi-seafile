@@ -22,13 +22,18 @@ autorun() {
   local RET=$?
   set -e
 
-  # Needed to change ip address from localhost to 0.0.0.0 in seafile/conf/gunicorn.conf.
-  sed -i s/127.0.0.1/0.0.0.0/ ${BASEPATH}/conf/gunicorn.conf
 
   # Try an initial setup on error
   if [ ${RET} -eq 255 ]
   then
     choose_setup
+
+    # Needed to change ip address from localhost to 0.0.0.0 in seafile/conf/gunicorn.conf.
+    # Otherwise, seafile server cannot configure onion addresses
+    sed -i s/127.0.0.1/0.0.0.0/ ${BASEPATH}/conf/gunicorn.conf
+
+    # Change port nubmer in order for Tor browser to connect port 8086 in Seahub server. 
+    sed -i s/port=8082/port=8086/ ${BASEPATH}/conf/seafile.conf
     control_seafile "start"
   elif [ ${RET} -gt 0 ]
   then
