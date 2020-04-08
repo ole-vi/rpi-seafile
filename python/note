@@ -1,0 +1,5 @@
+docker run -d --name seafile \
+  -e SEAFILE_SERVER_HOSTNAME=urgi6i7oywd3h3wz6jita7slf4cxr7yus6ehxeru6l4i7c5bt3vetfyd.onion \
+  -v /opt/seafile-data:/shared \
+  -p 80:80 \
+  seafileltd/seafile:latest

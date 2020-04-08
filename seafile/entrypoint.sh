@@ -15,6 +15,7 @@ trapped() {
 autorun() {
   # If there's an existing seafile config, link the dirs
   move_and_link
+  /usr/sbin/nginx
   
   # Needed to check the return code
   set +e
@@ -22,10 +23,7 @@ autorun() {
   local RET=$?
   set -e
 
-  # Needed to change ip address from localhost to 0.0.0.0 in seafile/conf/gunicorn.conf.
-  sed -i s/127.0.0.1/0.0.0.0/ ${BASEPATH}/conf/gunicorn.conf
-
-  # Try an initial setup on error
+    # Try an initial setup on error
   if [ ${RET} -eq 255 ]
   then
     choose_setup
@@ -35,6 +33,10 @@ autorun() {
     exit 1
   fi
 
+# Needed to change ip address from localhost to 0.0.0.0 in seafile/conf/gunicorn.conf.
+  sed -i s/127.0.0.1/0.0.0.0/ ${BASEPATH}/conf/gunicorn.conf
+  sed -i s/:8000// ${BASEPATH}/conf/ccnet.conf
+  echo "FILE_SERVER_ROOT = \"http://${SEAFILE_ADDRESS}/seafhttp\"" >> ${BASEPATH}/conf/seahub_settings.py 
 
   control_seahub "start"
   keep_in_foreground

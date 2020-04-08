@@ -1,0 +1,42 @@
+root@714c36df698b:/opt/seafile/conf# cat seahub_settings.py
+# -*- coding: utf-8 -*-
+SECRET_KEY = "$h256+24rszl%=a-%$os$@p!g%6y^glxxe)3gi6^adn86f^gls"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'seahub_db',
+        'USER': 'seafile',
+        'PASSWORD': 'dc6daf0b-2575-406d-90f6-9eb3451a58e8',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
+    }
+}
+
+
+FILE_SERVER_ROOT = "http://0.0.0.0/seafhttp"
+
+
+root@714c36df698b:/opt/seafile/conf# cat ccnet.conf 
+[General]
+USER_NAME = seafile
+ID = ab183b80a3a30a5b9ec0dba67d31ef11906c1716
+NAME = seafile
+SERVICE_URL = http://0.0.0.0:8000
+
+[Client]
+PORT = 13419
+
+[Database]
+ENGINE = mysql
+HOST = 127.0.0.1
+PORT = 3306
+USER = seafile
+PASSWD = dc6daf0b-2575-406d-90f6-9eb3451a58e8
+DB = ccnet_db
+CONNECTION_CHARSET = utf8
+
+
+[Client]
+UNIX_SOCKET = /opt/seafile/ccnet.sock
+
