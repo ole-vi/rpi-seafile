@@ -1,4 +1,4 @@
-# Seafile-rpi
+# Seafile for raspberry pi
 
 ## Basic information
 
