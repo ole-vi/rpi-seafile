@@ -22,6 +22,11 @@ RUN chown -R seafile:seafile ${DATADIR} ${BASEPATH}
 RUN pip install certifi idna 
 
 COPY ["entrypoint.sh", "/usr/local/bin/"]
+COPY ["seafile.conf", "/etc/nginx/sites-available/"]
+
+RUN rm /etc/nginx/sites-enabled/default
+RUN ln -s /etc/nginx/sites-available/seafile.conf /etc/nginx/sites-enabled/seafile.conf
+RUN chmod +x /etc/nginx/sites-enabled/ 
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 RUN locale-gen en_US.UTF-8
@@ -32,3 +37,4 @@ ENV LC_ALL en_US.UTF-8
 RUN localedef -i en_US -c -f UTF-8 -A /etc/locale.alias en_US.UTF-8
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"] 
+#ENTRYPOINT ["python"]
