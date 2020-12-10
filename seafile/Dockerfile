@@ -1,25 +1,38 @@
-FROM hirotochigi/rpi-python
+
+FROM treehouses/debian:latest
 MAINTAINER hiroTochigi
 
 ENV DATADIR /seafile
 ENV BASEPATH /opt/haiwen
 
-RUN sudo apt-get update && apt-get install -y \
-    python-ldap python-urllib3 python-imaging sqlite3 curl locales nginx\
-    --no-install-recommends \
-    && apt-get autoclean \
-    && rm -rf /var/lib/apt/lists/*
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    python \
+    python-dev \
+    python-pip \
+    python-virtualenv \
+    python-ldap \
+    python-urllib3 \
+    python-pil \
+    sqlite3 \
+    curl \
+    locales \
+    nginx \
+    --no-install-recommends && \
+    apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/*
+
 
 RUN useradd -d ${DATADIR} -M -s /bin/bash -c "Seafile User" seafile \
-    && mkdir -p ${DATADIR} ${BASEPATH} 
+    && mkdir -p ${DATADIR} ${BASEPATH}
 
 RUN curl -skL https://github.com/$(curl -skL https://github.com/haiwen/seafile-rpi/releases \
     | grep -oE 'haiwen/seafile-rpi/releases/download/v.*/seafile-server_.*_stable_pi.tar.gz'|sort -r|head -1) \
-    | tar -C ${BASEPATH} -xz 
+    | tar -C ${BASEPATH} -xz
 
 RUN chown -R seafile:seafile ${DATADIR} ${BASEPATH}
 
-RUN pip install certifi idna 
+RUN pip install certifi idna
 
 COPY ["entrypoint.sh", "/usr/local/bin/"]
 RUN chmod +x /usr/local/bin/entrypoint.sh
